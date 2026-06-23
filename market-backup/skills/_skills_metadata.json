@@ -1,0 +1,234 @@
+[
+  {
+    "id": "开发工具箱/api-tester",
+    "original_name": "api-tester",
+    "display_name": "API测试",
+    "description": "快速测试REST API，支持多种请求方式、认证方式和响应分析",
+    "category": "开发工具",
+    "agent_count": 1
+  },
+  {
+    "id": "Agent Deploy/agent-import",
+    "original_name": "agent-import",
+    "display_name": "Agent 导入器",
+    "description": "从 Cursor、Claude Code、CodeBuddy、GitHub Copilot 导入 Agent",
+    "category": "开发工具",
+    "agent_count": 1
+  },
+  {
+    "id": "Agent Deploy/agent-deploy",
+    "original_name": "agent-deploy",
+    "display_name": "Agent 部署器",
+    "description": "一键部署 Agent 到目标 AI 工具",
+    "category": "开发工具",
+    "agent_count": 1
+  },
+  {
+    "id": "开发工具箱/git-helper",
+    "original_name": "git-helper",
+    "display_name": "Git助手",
+    "description": "智能Git管理工具，分支管理、冲突解决、提交规范、标签管理",
+    "category": "开发工具",
+    "agent_count": 1
+  },
+  {
+    "id": "html-anything/html-anything",
+    "original_name": "html-anything",
+    "display_name": "HTML Anything",
+    "description": "将 Markdown、CSV、Excel、JSON、SQL 等内容转换为精美可发布的 HTML。支持 75 种技能模板、9 种输出场景（杂志文章、演示文稿、海报、数据报告、网页原型等），一键导出到微信公众号/X/知乎/PNG。基于 Open Design 设计系统，硬编码设计约束确保输出无 AI 味。",
+    "category": "content-creation",
+    "agent_count": 0
+  },
+  {
+    "id": "Agent Deploy/agent-upload",
+    "original_name": "agent-upload",
+    "display_name": "Market 上传器",
+    "description": "将本地 Agent 打包上传到 Market",
+    "category": "开发工具",
+    "agent_count": 1
+  },
+  {
+    "id": "aliyun-sls-agent/sql-analysis",
+    "original_name": "sql-analysis",
+    "display_name": "SQL分析",
+    "description": "使用SQL语法对SLS日志进行聚合分析和统计",
+    "category": "运维监控",
+    "agent_count": 1
+  },
+  {
+    "id": "内容创作大师/code-review",
+    "original_name": "code-review",
+    "display_name": "代码审查",
+    "description": "自动审查代码质量、发现潜在问题、提供优化建议和修改示例",
+    "category": "内容创作",
+    "agent_count": 1
+  },
+  {
+    "id": "办公效率助手/task-planner",
+    "original_name": "task-planner",
+    "display_name": "任务规划",
+    "description": "智能任务规划工具，支持任务拆解、优先级排序、进度跟踪",
+    "category": "办公效率",
+    "agent_count": 1
+  },
+  {
+    "id": "企微智能助手/wecom-approval",
+    "original_name": "wecom-approval",
+    "display_name": "企微审批助手",
+    "description": "企业微信审批流程助手，发起审批、查询状态、批量处理、催办",
+    "category": "企业协作",
+    "agent_count": 1
+  },
+  {
+    "id": "企微智能助手/wecom-docs",
+    "original_name": "wecom-docs",
+    "display_name": "企微文档协作",
+    "description": "企业微信文档智能助手，创建/编辑微文档、表格、收集表",
+    "category": "企业协作",
+    "agent_count": 1
+  },
+  {
+    "id": "企微智能助手/wecom-calendar",
+    "original_name": "wecom-calendar",
+    "display_name": "企微日程管理",
+    "description": "企业微信日程智能助手，创建日程、查询空闲时间、预订会议室",
+    "category": "企业协作",
+    "agent_count": 1
+  },
+  {
+    "id": "企微智能助手/wecom-message",
+    "original_name": "wecom-message",
+    "display_name": "企微消息助手",
+    "description": "企业微信消息管理助手，支持发送应用消息、群机器人消息、图文消息、Markdown消息",
+    "category": "企业协作",
+    "agent_count": 1
+  },
+  {
+    "id": "办公效率助手/meeting-summary",
+    "original_name": "meeting-summary",
+    "display_name": "会议纪要",
+    "description": "自动整理会议要点，生成结构化会议纪要，包含决议事项和行动项",
+    "category": "办公效率",
+    "agent_count": 1
+  },
+  {
+    "id": "内容创作大师/content-writer",
+    "original_name": "content-writer",
+    "display_name": "内容创作",
+    "description": "全能内容创作工具，支持博客文章、营销文案、社交媒体内容、技术文档",
+    "category": "内容创作",
+    "agent_count": 1
+  },
+  {
+    "id": "数据分析专家/chart-generator",
+    "original_name": "chart-generator",
+    "display_name": "图表生成",
+    "description": "自动生成柱状图、折线图、饼图、散点图、热力图等可视化图表",
+    "category": "数据分析",
+    "agent_count": 1
+  },
+  {
+    "id": "aliyun-sls-agent/log-tail",
+    "original_name": "log-tail",
+    "display_name": "实时日志跟踪",
+    "description": "实时跟踪SLS日志流，快速定位线上问题",
+    "category": "运维监控",
+    "agent_count": 1
+  },
+  {
+    "id": "数据分析专家/report-builder",
+    "original_name": "report-builder",
+    "display_name": "报告生成",
+    "description": "自动生成数据分析报告，支持Markdown、HTML、PDF等多种输出格式",
+    "category": "数据分析",
+    "agent_count": 1
+  },
+  {
+    "id": "数据分析专家/data-analyzer",
+    "original_name": "data-analyzer",
+    "display_name": "数据分析",
+    "description": "专业数据分析工具，支持数据清洗、统计分析、趋势分析、关联分析",
+    "category": "数据分析",
+    "agent_count": 1
+  },
+  {
+    "id": "办公效率助手/doc-writing",
+    "original_name": "doc-writing",
+    "display_name": "文档写作",
+    "description": "智能文档写作工具，支持工作报告、项目方案、需求文档、总结报告",
+    "category": "办公效率",
+    "agent_count": 1
+  },
+  {
+    "id": "aliyun-sls-agent/log-search",
+    "original_name": "log-search",
+    "display_name": "日志搜索",
+    "description": "阿里云SLS日志搜索，支持关键词搜索、全文检索、模糊匹配",
+    "category": "运维监控",
+    "agent_count": 1
+  },
+  {
+    "id": "内容创作大师/translation",
+    "original_name": "translation",
+    "display_name": "智能翻译",
+    "description": "多语言智能翻译，保持原文风格和语义准确性，支持专业术语处理",
+    "category": "内容创作",
+    "agent_count": 1
+  },
+  {
+    "id": "开发工具箱/debug-assistant",
+    "original_name": "debug-assistant",
+    "display_name": "调试助手",
+    "description": "智能错误分析、日志解读、性能诊断，支持多种编程语言",
+    "category": "开发工具",
+    "agent_count": 1
+  },
+  {
+    "id": "aliyun-sls-agent/resource-discovery",
+    "original_name": "resource-discovery",
+    "display_name": "资源发现",
+    "description": "自动发现SLS Project和LogStore，快速导航日志源",
+    "category": "运维监控",
+    "agent_count": 1
+  },
+  {
+    "id": "办公效率助手/email-compose",
+    "original_name": "email-compose",
+    "display_name": "邮件撰写",
+    "description": "智能商务邮件撰写，支持通知、邀请、汇报、申请等多种场景",
+    "category": "办公效率",
+    "agent_count": 1
+  },
+  {
+    "id": "飞书智能助手/feishu-approval",
+    "original_name": "feishu-approval",
+    "display_name": "飞书审批助手",
+    "description": "飞书审批流程助手，发起审批、查询状态、批量处理、催办",
+    "category": "企业协作",
+    "agent_count": 1
+  },
+  {
+    "id": "飞书智能助手/feishu-docs",
+    "original_name": "feishu-docs",
+    "display_name": "飞书文档协作",
+    "description": "飞书文档智能助手，创建/编辑云文档、电子表格、多维表格",
+    "category": "企业协作",
+    "agent_count": 1
+  },
+  {
+    "id": "飞书智能助手/feishu-calendar",
+    "original_name": "feishu-calendar",
+    "display_name": "飞书日程管理",
+    "description": "飞书日程智能助手，创建日程、查询空闲时间、预订会议室",
+    "category": "企业协作",
+    "agent_count": 1
+  },
+  {
+    "id": "飞书智能助手/feishu-message",
+    "original_name": "feishu-message",
+    "display_name": "飞书消息助手",
+    "description": "飞书消息管理助手，支持发送应用消息、群机器人消息、富文本消息、卡片消息",
+    "category": "企业协作",
+    "agent_count": 1
+  }
+]

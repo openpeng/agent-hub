@@ -1,0 +1,33 @@
+diff --git a/src/market/server.py b/src/market/server.py
+index abc123..def456 100644
+--- a/src/market/server.py
++++ b/src/market/server.py
+@@ -46,8 +46,8 @@ _server_start_time = time.time()
+ 
+ app = FastAPI(
+     title="PilotDeck Market Service",
+-    description="Agent 市场服务 - 注册、搜索、下载、评分 Agent 包",
+-    version="1.0.0",
++    description="Agent 市场服务 - 注册、搜索、下载、评分 Agent 包 (v3.1)",
++    version="1.1.0",
+ )
+ 
+@@ -164,7 +164,7 @@ async def health_check():
+     stats = await db.get_stats()
+     return HealthResponse(
+         status="ok",
+-        version="1.0.0",
++        version="1.1.0",
+         agents_count=stats["agents_count"],
+         teams_count=stats.get("teams_count", 0),
+         workflows_count=stats.get("workflows_count", 0),
+
+# 注：此补丁仅包含版本号变更。
+# 完整的 v3.1 代码变更已保存在以下文件中：
+# - src/market/database.py (数据库扩展)
+# - src/market/server.py (新增 4 个 API 端点)
+# - src/market/package.py (新增 pack/extract 函数)
+# - src/market/verify.py (新增 verify 函数)
+# - src/market/skills_mcp.py (更新提取逻辑)
+#
+# 服务器端部署时，请直接复制这 5 个文件覆盖旧版本。

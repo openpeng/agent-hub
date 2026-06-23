@@ -1,0 +1,173 @@
+# Pipeline 定义
+# 流程: 发现日志源 → 采集日志 → LLM 分析 → 生成报告
+
+# 声明全部工具 (builtin + MCP)
+tools:
+  - name: write_file
+    type: builtin
+  - name: llm_chat
+    type: builtin
+  - name: aliyun-log__sls_get_credentials
+    type: mcp
+  - name: aliyun-log__sls_list_projects
+    type: mcp
+  - name: aliyun-log__sls_list_logstores
+    type: mcp
+  - name: aliyun-log__sls_query_logs
+    type: mcp
+  - name: aliyun-log__sls_tail_logs
+    type: mcp
+
+pipeline:
+  # Step 1: 快速确认凭证和日志源
+  - step: check_config
+    tool: aliyun-log__sls_get_credentials
+    output: creds
+    on_fail: continue
+    comment: 验证 SLS 配置是否正常
+
+  # Step 2: 列出可用的 Project（环境发现）
+  - step: list_projects
+    tool: aliyun-log__sls_list_projects
+    args:
+      filter: "{{project_filter}}"
+    output: projects
+    on_fail: continue
+    comment: 按关键字过滤 SLS 项目，默认不加过滤列出全部
+
+  # Step 3: 列出 LogStore（服务发现）
+  - step: find_logstores
+    tool: aliyun-log__sls_list_logstores
+    args:
+      project: "{{project}}"
+      filter: "{{service_filter}}"
+    output: logstores
+    on_fail: continue
+    comment: 在目标 project 中按服务名过滤 logstore
+
+  # Step 4: 采集最近日志（错误优先）
+  - step: collect_errors
+    tool: aliyun-log__sls_query_logs
+    args:
+      project: "{{project}}"
+      logStore: "{{logstore}}"
+      query: "{{query}}"
+      fromMinutesAgo: "{{lookback_minutes}}"
+      line: "{{max_lines}}"
+      fast: true
+    output: raw_logs
+    on_fail: continue
+    comment: 采集日志数据，默认查询 ERROR 级别
+
+  # Step 5: 采集 SQL 统计（错误聚合视图）
+  - step: error_stats
+    when: "{{steps.collect_errors.success}} == true"
+    tool: aliyun-log__sls_query_logs
+    args:
+      project: "{{project}}"
+      logStore: "{{logstore}}"
+      query: "* | select level, count(*) as cnt group by level"
+      fromMinutesAgo: "{{lookback_minutes}}"
+      fast: false
+    output: stats
+    on_fail: continue
+    comment: 按日志级别统计分布
+
+  # Step 6: 采集慢请求 SQL（性能分析）
+  - step: slow_queries
+    when: "{{steps.collect_errors.success}} == true"
+    tool: aliyun-log__sls_query_logs
+    args:
+      project: "{{project}}"
+      logStore: "{{logstore}}"
+      query: "* | select requestUri, avg(rt) as avg_rt, count(*) as cnt from log group by requestUri having avg_rt > 1000 order by avg_rt desc limit 10"
+      fromMinutesAgo: "{{lookback_minutes}}"
+      fast: false
+    output: slow_queries
+    on_fail: continue
+    comment: 找出平均响应时间超 1 秒的接口
+
+  # Step 7: LLM 综合分析
+  - step: analyze
+    tool: llm_chat
+    args:
+      system_prompt: |
+        你是阿里云 SLS 日志分析专家。分析以下日志数据，输出结构化诊断报告。
+
+        报告格式要求：
+        ## 诊断摘要
+        - 时间范围、数据量概览
+        - 健康度评级（正常/警告/严重）
+
+        ## 错误分析
+        - 错误级别分布（ERROR/WARN/INFO）
+        - Top N 错误类型（按频次排序）
+        - 是否有新出现的错误类型
+
+        ## 性能分析
+        - 慢接口 Top 5
+        - 是否有异常耗时增长
+
+        ## 异常检测
+        - 异常模式识别（突发错误、周期性波动）
+        - 关联分析（同一时间窗口内的关联错误）
+
+        ## 处理建议
+        - 按优先级排列的修复建议
+        - 需要进一步排查的方向
+
+        分析原则：
+        - 不要输出原始日志内容
+        - 聚焦于可执行的结论
+        - 如果有数据缺失，明确指出
+        - 代码和路径使用反引号包裹
+      prompt: |
+        请分析以下阿里云 SLS 日志数据：
+
+        === 查询参数 ===
+        Project: {{project}}
+        LogStore: {{logstore}}
+        查询语句: {{query}}
+        回溯时间: {{lookback_minutes}} 分钟
+
+        === 日志统计 ===
+        {{steps.error_stats.output}}
+
+        === 原始日志（错误） ===
+        {{steps.raw_logs.output}}
+
+        === 慢请求 ===
+        {{steps.slow_queries.output}}
+
+        === 可选日志源 ===
+        Projects: {{steps.list_projects.output}}
+        LogStores: {{steps.find_logstores.output}}
+
+        请生成完整的诊断报告。
+    output: report
+    on_fail:
+      retry: 2
+    comment: LLM 综合分析，带重试保护
+
+  # Step 8: 输出报告到文件
+  - step: save_report
+    tool: write_file
+    args:
+      path: "log-analysis-report-{{timestamp}}.md"
+      content: |
+        # 阿里云 SLS 日志分析报告
+
+        > 生成时间: {{timestamp}}
+        > 分析目标: {{project}} / {{logstore}}
+        > 查询条件: `{{query}}`
+        > 回溯范围: 最近 {{lookback_minutes}} 分钟
+
+        ---
+
+        {{steps.analyze.output}}
+
+        ---
+        *报告由 Aliyun Log Analyzer Agent 自动生成*
+    output: report_file
+    on_fail: skip
+    comment: 保存分析报告到本地文件

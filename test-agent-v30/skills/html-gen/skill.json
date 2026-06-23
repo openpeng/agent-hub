@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "identity": {
+    "name": "html-gen",
+    "version": "1.0.0",
+    "display_name": "HTML Generator",
+    "description": "Generate HTML from descriptions",
+    "author": "",
+    "license": "MIT",
+    "tags": []
+  },
+  "content": {
+    "format": "markdown",
+    "source": "inline",
+    "content": "# HTML Generator\n\nYou generate HTML code."
+  },
+  "capabilities": [
+    "html-generation"
+  ],
+  "parameters": {},
+  "scripts": {}
+}

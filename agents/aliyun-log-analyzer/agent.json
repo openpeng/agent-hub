@@ -1,0 +1,21 @@
+{
+  "schema_version": "3.0",
+  "identity": {
+    "name": "aliyun-log-analyzer",
+    "version": "1.0.0",
+    "display_name": "阿里云日志分析 Agent",
+    "description": "自动从阿里云 SLS 读取日志 → LLM 智能分析（错误模式识别、异常检测、趋势研判）→ 输出结构化诊断报告。支持生产/测试/开发环境一键切换。",
+    "author": "Peng Xiao",
+    "tags": ["aliyun", "sls", "log", "analysis", "monitoring", "ops"]
+  },
+  "entry": { "main_subagent": "worker" },
+  "subagents": [
+    {
+      "name": "worker",
+      "path": "worker.yaml",
+      "description": "日志采集 → LLM分析 → 写报告"
+    }
+  ],
+  "category": "operations",
+  "type": "agent"
+}

@@ -1,0 +1,66 @@
+# Aliyun SLS 日志查询 Pipeline
+# 支持: 关键词查询、SQL 分析、实时 tail、Project/LogStore 发现
+
+tools:
+  - name: llm_chat
+    type: builtin
+  - name: aliyun-log__sls_query_logs
+    type: mcp
+  - name: aliyun-log__sls_tail_logs
+    type: mcp
+  - name: aliyun-log__sls_list_projects
+    type: mcp
+  - name: aliyun-log__sls_list_logstores
+    type: mcp
+  - name: aliyun-log__sls_get_credentials
+    type: mcp
+
+pipeline:
+  # 使用 LLM 智能理解用户意图，自主调用 MCP 工具完成日志查询
+  - step: handle_query
+    tool: llm_chat
+    args:
+      system_prompt: |
+        你是 Aliyun SLS 日志查询专家，帮助用户查询阿里云日志服务（SLS）。
+
+        ## 可用工具
+        - `aliyun-log__sls_get_credentials`：查看当前凭证配置（脱敏）
+        - `aliyun-log__sls_list_projects`：列出所有 SLS 项目，支持模糊过滤
+        - `aliyun-log__sls_list_logstores`：列出指定项目下的 LogStore，支持模糊过滤
+        - `aliyun-log__sls_query_logs`：查询日志（关键词或 SQL 分析）
+        - `aliyun-log__sls_tail_logs`：获取最近 N 条日志（实时 tail）
+
+        ## 查询决策流程
+        1. 确认 Project → 确认 LogStore → 构造查询 → 获取结果
+        2. 如果不知道 Project/LogStore，先调用 list 工具发现
+        3. 优先用相对时间（fromMinutesAgo），避免时区问题
+        4. 关键词查询用 fast=true（默认），SQL 分析用 fast=false
+
+        ## 常见查询示例
+        - 查最近错误：query="level:ERROR", fromMinutesAgo=15
+        - 查 traceId：query="traceId:xxx", fromMinutesAgo=60
+        - 统计错误分布：query="level:ERROR | select level, count(*) group by level", fast=false
+        - 实时 tail：sls_tail_logs(lastMinutes=5, line=50)
+
+        ## 输出要求
+        - 返回结构化的查询结果
+        - 如果是分析类查询，给出结论和建议
+        - 如果数据量大的查询失败，建议缩小时间范围或增加过滤条件
+      prompt: "{{user_input}}"
+      tools:
+        - aliyun-log__sls_query_logs
+        - aliyun-log__sls_tail_logs
+        - aliyun-log__sls_list_projects
+        - aliyun-log__sls_list_logstores
+        - aliyun-log__sls_get_credentials
+    output: result
+    on_fail:
+      retry:
+        max_attempts: 2
+        backoff: "exponential"
+    comment: LLM 智能理解用户意图，自主调用 MCP 工具完成查询
+
+parameters:
+  - name: user_input
+    description: "用户的日志查询请求（自然语言或具体查询参数）"
+    required: true

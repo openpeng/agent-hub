@@ -1,0 +1,45 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  npm-publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agent-deploy/node
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  docker-build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t agent-market:${{ github.ref_name }} agent-market/
+
+      - name: Push Docker image
+        if: ${{ secrets.DOCKER_REGISTRY != '' }}
+        run: |
+          docker tag agent-market:${{ github.ref_name }} ${{ secrets.DOCKER_REGISTRY }}/agent-market:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKER_REGISTRY }}/agent-market:${{ github.ref_name }}

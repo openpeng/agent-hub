@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build output
+dist/
+*.egg-info/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Packages (built artifacts)
+*.tar.gz
+*.zip
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Test artifacts
+test-skill/
+test-mcp-server/
+verify-agents/
+
+# Temporary
+.claude/
+.codebuddy/
+.workbuddy/
+
+# node (binary/toolchain, not source)
+node/

@@ -1,0 +1,10 @@
+Preparing notification: agent-market 前端已重新部署 - 部署信息通知
+
+Notification sent at 2026-06-06T14:30:00Z
+Title: agent-market 前端已重新部署
+Body: 
+  前端部署地址：https://agent-market-fe-rvy5cwzk.edgeone.cool
+  后端 API 地址：https://market.aitboy.cn/
+  前端已配置为调用 https://market.aitboy.cn/api/v1
+  项目 ID：makers-sjt7hoecp8tz
+Response: {"code":200,"message":"success","timestamp":1781340112}

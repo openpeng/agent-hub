@@ -1,0 +1,33 @@
+{
+  "schema_version": "3.0",
+  "identity": {
+    "name": "aliyun-sls-agent",
+    "version": "1.0.0",
+    "display_name": "Aliyun SLS 日志查询 Agent",
+    "description": "基于 alilog-mcp 的阿里云 SLS 日志查询 Agent，支持关键词搜索、SQL 分析、实时 tail、Project/LogStore 发现。适用于运维排障、错误分析、性能监控等场景。",
+    "author": "openpeng",
+    "license": "MIT",
+    "tags": ["aliyun", "sls", "log", "mcp", "monitoring", "ops"]
+  },
+  "entry": { "main_subagent": "worker" },
+  "subagents": [
+    {
+      "name": "worker",
+      "path": "worker.yaml",
+      "description": "SLS 日志查询主流程"
+    }
+  ],
+  "mcp_servers": [
+    {
+      "name": "aliyun-log",
+      "command": "npx",
+      "args": ["-y", "@openpeng/alilog-mcp"],
+      "env": {
+        "CRED_SOURCE": "consul",
+        "CONSUL_URL": "https://dev-consul.gaodunwangxiao.com"
+      }
+    }
+  ],
+  "category": "operations",
+  "type": "agent"
+}

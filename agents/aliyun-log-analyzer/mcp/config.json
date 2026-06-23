@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "aliyun-log": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["--registry=https://registry.npmmirror.com", "-y", "@openpeng/alilog-mcp"],
+      "env": {
+        "CRED_SOURCE": "consul",
+        "CONSUL_URL": "https://dev-consul.gaodunwangxiao.com",
+        "CONSUL_PATH_ENDPOINT": "gaodun/config_center/public/ALI_SLS_ENDPOINT",
+        "CONSUL_PATH_AK_ID": "gaodun/config_center/public/ALI_SLS_ACCESS_KEY_ID",
+        "CONSUL_PATH_AK_SECRET": "gaodun/config_center/public/ALI_SLS_ACCESS_KEY_SECRET",
+        "CONSUL_PATH_PROJECT": "gaodun/config_center/public/ALI_SLS_PROJECT"
+      }
+    }
+  }
+}

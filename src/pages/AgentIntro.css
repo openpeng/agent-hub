@@ -1,0 +1,289 @@
+/* AgentIntro 页面样式 */
+
+/* 页面容器 */
+.intro-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+/* 分组标题 */
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-section-title .section-icon {
+  color: var(--accent);
+}
+
+/* 两列表单布局 */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 图标选择器 */
+.icon-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.icon-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.5rem;
+  border: 2px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg);
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.icon-option:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.icon-option.selected {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.icon-option .icon-emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.icon-option .icon-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.icon-option.selected .icon-label {
+  color: var(--accent);
+}
+
+/* 图标URL输入区域 */
+.icon-url-section {
+  margin-bottom: 1rem;
+}
+
+.icon-url-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-url-row .form-input {
+  flex: 1;
+}
+
+.icon-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.icon-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 标签选择器 */
+.tag-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.tag-option:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.tag-option.selected {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 示例列表 */
+.example-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.example-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.example-item .form-input {
+  flex: 1;
+}
+
+.example-item .example-index {
+  font-size: 0.8rem;
+  color: var(--muted);
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.example-item .btn-remove {
+  flex-shrink: 0;
+}
+
+/* 底部操作栏 */
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 240px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  background: var(--bg2);
+  border-top: 1px solid var(--rule);
+  z-index: 100;
+}
+
+.action-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.action-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* 自动保存提示 */
+.auto-save {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.auto-save .save-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  flex-shrink: 0;
+}
+
+.auto-save.saving .save-dot {
+  background: var(--warning);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* 添加按钮样式 */
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.add-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* 分隔线 */
+.form-divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1.5rem 0;
+}
+
+/* 响应式：侧边栏收起时 */
+@media (max-width: 1024px) {
+  .action-bar {
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .action-bar {
+    padding: 0.75rem 1rem;
+  }
+
+  .icon-selector {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

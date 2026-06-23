@@ -1,0 +1,27 @@
+{
+  "schema_version": "3.0",
+  "identity": {
+    "name": "test-agent-v30",
+    "version": "1.0.0",
+    "display_name": "Test Agent v3.0",
+    "description": "A test agent using v3.0 format"
+  },
+  "instructions": {
+    "format": "markdown",
+    "source": "inline",
+    "content": "# Test Agent\n\nYou are a test agent."
+  },
+  "subagents": [
+    {
+      "type": "skill",
+      "name": "html-gen",
+      "path": "skills/html-gen"
+    },
+    {
+      "type": "agent",
+      "name": "sub-agent",
+      "path": "sub-agents/sub-agent"
+    }
+  ],
+  "capabilities": ["test"]
+}

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  market:
+    build:
+      context: ./agent-market
+    ports:
+      - "8321:8321"
+    volumes:
+      - market-data:/app/data
+      - packages:/app/data/market/packages
+    environment:
+      - MARKET_MASTER_KEY=${MARKET_MASTER_KEY:-}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8321/api/v1/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - market
+    restart: unless-stopped
+
+volumes:
+  market-data:
+  packages:

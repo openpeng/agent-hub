@@ -1,0 +1,27 @@
+{
+  "backup_time": "2026-06-23T02:19:13Z",
+  "market_url": "https://market.aitboy.cn",
+  "api_key_used": true,
+  "contents": {
+    "agents": {
+      "description": "Agent 包（tar.gz 格式）",
+      "path": "agents/",
+      "metadata": "agents/_agents_metadata.json"
+    },
+    "skills": {
+      "description": "Skill 元数据（JSON 格式，内容在 Agent 包中）",
+      "path": "skills/",
+      "metadata": "skills/_skills_metadata.json"
+    },
+    "mcp_servers": {
+      "description": "MCP Server 元数据（JSON 格式，配置在 Agent 包中）",
+      "path": "mcp-servers/",
+      "metadata": "mcp-servers/_mcp_servers_metadata.json"
+    }
+  },
+  "restore_guide": {
+    "agent_restore": "将 agents/*.tar.gz 上传到市场: agent-deploy upload <file>",
+    "skill_restore": "Skills 随 Agent 包一起恢复",
+    "mcp_restore": "MCP Servers 随 Agent 包一起恢复"
+  }
+}

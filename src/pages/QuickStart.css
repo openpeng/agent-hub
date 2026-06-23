@@ -1,0 +1,209 @@
+.quickstart-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  min-height: 100%;
+}
+
+.quickstart-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.quickstart-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 0.5rem;
+}
+
+.quickstart-header p {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+/* 创建方式卡片 */
+.quickstart-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 3rem;
+}
+
+.quickstart-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+.quickstart-card:hover {
+  border-color: #38bdf8;
+  background: #1a2744;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.quickstart-card.ai-card:hover {
+  border-color: #a78bfa;
+  background: #231e3b;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+}
+
+.quickstart-card-badge {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.quickstart-card-badge.recommend {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.quickstart-card-badge.smart {
+  background: #a78bfa;
+  color: #fff;
+}
+
+.quickstart-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.quickstart-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 0.5rem;
+}
+
+.quickstart-card-desc {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.quickstart-card-action {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.quickstart-card.ai-card .quickstart-card-action {
+  color: #a78bfa;
+}
+
+/* 最近编辑 */
+.quickstart-recent {
+  width: 100%;
+  max-width: 720px;
+}
+
+.quickstart-recent-title {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quickstart-recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quickstart-recent-item {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.quickstart-recent-item:hover {
+  border-color: #38bdf8;
+  background: #1a2744;
+}
+
+.quickstart-recent-icon {
+  font-size: 1.25rem;
+}
+
+.quickstart-recent-info {
+  flex: 1;
+}
+
+.quickstart-recent-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.quickstart-recent-meta {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.quickstart-recent-status {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.quickstart-recent-status.draft {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+}
+
+.quickstart-recent-status.published {
+  background: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+}
+
+.quickstart-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #475569;
+  font-size: 0.85rem;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .quickstart-methods {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .quickstart-page {
+    padding: 2rem 1rem;
+  }
+}
